@@ -1,12 +1,14 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './Fiter.module.css';
-import { selectFilter } from 'redux/rootReducer';
+import { selectFilter, setFilter } from 'redux/rootReducer';
 
-const Filter = ({ handleFilterChange }) => {
+const Filter = () => {
   const filter = useSelector(selectFilter);
+  const dispatch = useDispatch();
+
   const handleByFilter = e => {
-    const value = e.target.value;
-    handleFilterChange(value.trim().toLowerCase());
+    const value = e.target.value.trim().toLowerCase();
+    dispatch(setFilter(value));
   };
 
   return (

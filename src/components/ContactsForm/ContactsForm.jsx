@@ -1,13 +1,14 @@
-import { nanoid } from 'nanoid';
 import css from './ContactsForm.module.css';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/rootReducer';
+import { addContactsThunk } from 'thunk/thunk';
 
-const ContactsForm = ({ addContact }) => {
+const ContactsForm = () => {
   const contacts = useSelector(selectContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
 
   const handleChangeName = e => {
     setName(e.target.value);
@@ -29,12 +30,11 @@ const ContactsForm = ({ addContact }) => {
     }
 
     const newContact = {
-      id: nanoid(),
       name: name,
-      number: number,
+      phone: number,
     };
+    dispatch(addContactsThunk(newContact));
 
-    addContact(newContact);
     setName('');
     setNumber('');
   };

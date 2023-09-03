@@ -3,24 +3,7 @@ import css from './App.module.css';
 import ContactList from '../ContactList/ContactList';
 import Filter from '../Filter/Filter';
 
-import { useDispatch } from 'react-redux';
-import { deleteContact, setContacts, setFilter } from 'redux/rootReducer';
-
 const App = () => {
-  const dispatch = useDispatch();
-
-  const addContact = newContact => {
-    dispatch(setContacts(newContact));
-  };
-
-  const handleFilterChange = value => {
-    dispatch(setFilter(value));
-  };
-
-  const handleDeleteContact = id => {
-    dispatch(deleteContact(id));
-  };
-
   return (
     <div
       style={{
@@ -34,9 +17,9 @@ const App = () => {
     >
       <div className={css.wrapper}>
         <h1 className={css.h1}>Phonebook</h1>
-        <ContactsForm addContact={addContact} />
-        <Filter handleFilterChange={handleFilterChange} />
-        <ContactList handleDeleteContact={handleDeleteContact} />
+        <ContactsForm />
+        <Filter />
+        <ContactList />
       </div>
     </div>
   );
